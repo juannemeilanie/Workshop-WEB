@@ -7,13 +7,15 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('login');
 });
 
 Auth::routes();
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
 
 Route::middleware(['check'])->group(function () {
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 // kategori
 Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori.index');

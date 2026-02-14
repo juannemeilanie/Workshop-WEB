@@ -2,15 +2,6 @@
 
 @section('title', 'Dashboard')
 
-@push('style')
-<style>
-/* STYLE PAGE */
-.page-title {
-    color: purple;
-}
-</style>
-@endpush
-
 @section('content')
 <div class="page-header">
     <h3 class="page-title">Dashboard</h3>
