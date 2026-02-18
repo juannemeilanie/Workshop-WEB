@@ -3,6 +3,16 @@
 @section('title', 'Tambah Buku')
 
 @section('content')
+
+<div class="page-header">
+    <h3 class="page-title">Daftar Buku </h3>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Buku</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Tambah Buku</li>
+            </ol>
+      </nav>
+</div>
 <div class="card">
     <div class="card-body ">
         <h2>Tambah Buku</h2>

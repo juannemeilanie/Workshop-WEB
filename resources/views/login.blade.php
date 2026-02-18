@@ -61,8 +61,8 @@
                     <a href="#" class="auth-link text-primary">Forgot password?</a>
                   </div>
                   <div class="mb-2 d-grid gap-2">
-                    <button type="button" class="btn btn-block btn-facebook auth-form-btn">
-                      <i class="mdi mdi-facebook me-2"></i>Connect using facebook </button>
+                    <a href="/auth/google/redirect" class="btn btn-block btn-google auth-form-btn">
+                      <i class="fa fa-google-plus me-2 "></i>Sign in using google </a>
                   </div>
                   <div class="text-center mt-4 font-weight-light"> Don't have an account? <a href="{{ route('register') }}" class="text-primary">Create</a>
                   </div>

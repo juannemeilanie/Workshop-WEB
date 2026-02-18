@@ -4,9 +4,27 @@
 
 @section('content')
 <body>
+<div class="page-header">
+    <h3 class="page-title"> Kategori </h3>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Kategori</a></li>
+            </ol>
+      </nav>
+</div>
+          
     <div class="card">
     <div class="card-body">
+
         <h2>Kategori</h2>
+
+        @if(session('success'))
+            <div class="alert alert-success" role="alert" style="background:#d4edda; color:#155724; padding:10px; border-radius:6px;">
+                {{ session('success') }}
+            </div>
+        @endif
+
+
             <form action="{{ route('kategori.create') }}" method="GET" style="display: inline;">
                 <button type="submit" class="btn btn-rounded btn-gradient-primary">
                     <i class="fa fa-plus"></i> Tambah Kategori

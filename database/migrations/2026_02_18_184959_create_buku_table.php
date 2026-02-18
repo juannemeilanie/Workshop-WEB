@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    /**
+     * Run the migrations.
+     */
     public function up(): void
     {
         Schema::create('buku', function (Blueprint $table) {
@@ -13,13 +16,13 @@ return new class extends Migration
             $table->string('kode', 20);
             $table->string('judul', 500);
             $table->string('pengarang', 200);
-            $table->foreignId('idkategori')
-                  ->constrained('kategori', 'idkategori')
-                  ->onDelete('cascade');
-            $table->timestamps();
+            $table->foreignId('idkategori')->constrained('kategori', 'idkategori')->onDelete('cascade');
         });
     }
 
+    /**
+     * Reverse the migrations.
+     */
     public function down(): void
     {
         Schema::dropIfExists('buku');

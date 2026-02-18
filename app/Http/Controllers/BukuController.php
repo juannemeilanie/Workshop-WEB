@@ -66,7 +66,6 @@ class BukuController extends Controller
         ]);
     }
 
-    //helper untuk membuat data baru
     protected function createBuku(array $data){
         return DB::table('buku')->insert([
             'kode' => $data['kode'],

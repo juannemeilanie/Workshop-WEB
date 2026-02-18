@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Laravel\Socialite\Socialite;
 
 class LoginController extends Controller
 {
@@ -70,6 +72,25 @@ class LoginController extends Controller
         'email' => 'Email atau password salah',
     ])->withInput();
     }
+
+    public function googleRedirect(){
+        return Socialite::driver('google')->stateless()->redirect();
+    }
+
+    public function googleCallback(){
+        $googleUser = Socialite::driver('google')->stateless()->user();
+        $user = User::where('email',$googleUser->email)->first();
+        if(!$user){
+            $user = User::create([
+                'name' => $googleUser->name,
+                'email' => $googleUser->email,
+                'password' => bcrypt(uniqid()),
+            ]);
+            Auth::login($user);
+            return redirect()->route('dashboard');
+        }
+    }
+    
 
     public function logout(Request $request)
     {

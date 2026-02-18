@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KategoriController;
@@ -9,6 +10,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('login');
 });
+
+Route::get('/auth/google/redirect', [LoginController::class, 'googleRedirect']);
+Route::get('/auth/google/callback', [LoginController::class, 'googleCallback']);
+Route::get('/otp', [LoginController::class, 'showOtpForm'])->name('otp.form');
+Route::post('/otp', [LoginController::class, 'verifyOtp'])->name('otp.verify');
+
 
 Auth::routes();
 
