@@ -75,4 +75,10 @@ class BukuController extends Controller
             'idkategori' => $data['idkategori'],
         ]);
     }
+
+    public function destroy($id){
+        DB::table('buku')->where('idbuku', $id)->delete();
+        return redirect()->route('buku.index')
+                        ->with('success', 'Buku berhasil dihapus.');
+    }
 }

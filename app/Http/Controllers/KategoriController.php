@@ -52,4 +52,10 @@ class KategoriController extends Controller
             'nama_kategori' => $data['nama_kategori'],
         ]);
     }
+
+    public function destroy($id){
+        DB::table('kategori')->where('idkategori', $id)->delete();
+        return redirect()->route('kategori.index')
+                        ->with('success', 'Kategori berhasil dihapus.');
+    }
 }
