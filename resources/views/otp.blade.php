@@ -1,13 +1,13 @@
-<h3>Masukkan Kode OTP</h3>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kode OTP Anda</title>
+</head>
+<body>
+    <h2>Halo!</h2>
+    <p>Kode OTP untuk login Anda adalah:</p>
+    <h1>{{ $otp }}</h1>
+    <p>Kode ini berlaku 5 menit.</p>
+</body>
+</html>
 
-<form method="POST" action="{{ route('otp.verify') }}">
-    @csrf
-    <input type="text" name="otp" maxlength="6" placeholder="Masukkan 6 karakter OTP">
-    <button type="submit">Verifikasi</button>
-</form>
-
-@if($errors->any())
-    <div style="color:red;">
-        {{ $errors->first() }}
-    </div>
-@endif

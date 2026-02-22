@@ -4,6 +4,8 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\OtpController;
+use App\Http\Controllers\PdfController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -13,16 +15,21 @@ Route::get('/', function () {
 
 Route::get('/auth/google/redirect', [LoginController::class, 'googleRedirect']);
 Route::get('/auth/google/callback', [LoginController::class, 'googleCallback']);
-Route::get('/otp', [LoginController::class, 'showOtpForm'])->name('otp.form');
-Route::post('/otp', [LoginController::class, 'verifyOtp'])->name('otp.verify');
 
+Route::get('/otp', [OtpController::class, 'index'])->name('otp.form');
+Route::post('/otp', [OtpController::class, 'verify'])->name('otp.verify');
 
 Auth::routes();
 
 
-Route::middleware(['check'])->group(function () {
+Route::middleware(['auth'])->group(function () {
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+Route::prefix('pdf')->group(function () {
+    Route::get('/sertifikat', [PdfController::class, 'sertifikat'])->name('pdf.sertifikat');
+    Route::get('/undangan', [PdfController::class, 'undangan'])->name('pdf.undangan');
+});
 
 // kategori
 Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori.index');

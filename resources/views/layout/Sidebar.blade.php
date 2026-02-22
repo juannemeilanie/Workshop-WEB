@@ -34,5 +34,24 @@
                 <i class="fa fa-book menu-icon"></i>
               </a>
             </li>
+
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                <span class="menu-title">Download PDF</span>
+                <i class="menu-arrow"></i>
+                <i class="fa fa-download menu-icon"></i>
+              </a>
+              <div class="collapse" id="ui-basic">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ route('pdf.sertifikat') }}">Sertifikat</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ route('pdf.undangan') }}">Undangan</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+
           </ul>
         </nav>

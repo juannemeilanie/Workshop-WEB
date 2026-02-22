@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\OtpMail;
 use App\Models\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
-use Laravel\Socialite\Socialite;
+use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
 {
@@ -74,21 +76,33 @@ class LoginController extends Controller
     }
 
     public function googleRedirect(){
-        return Socialite::driver('google')->stateless()->redirect();
+        return Socialite::driver('google')->with(['prompt' => 'select_account'])->redirect();
     }
 
     public function googleCallback(){
-        $googleUser = Socialite::driver('google')->stateless()->user();
+        $googleUser = Socialite::driver('google')->user();
         $user = User::where('email',$googleUser->email)->first();
         if(!$user){
             $user = User::create([
                 'name' => $googleUser->name,
                 'email' => $googleUser->email,
+                'id_google' => $googleUser->id,
                 'password' => bcrypt(uniqid()),
             ]);
-            Auth::login($user);
-            return redirect()->route('dashboard');
         }
+
+            $otp = rand(100000, 999999);
+            $user->update([
+            'otp' => $otp,
+            'otp_expires_at' => now()->addMinutes(5)
+        ]);
+
+        Mail::to($user->email)->send(new OtpMail($otp));
+
+            session(['otp_user_id' => $user->id]);
+
+            return redirect()->route('otp.form');
+
     }
     
 
