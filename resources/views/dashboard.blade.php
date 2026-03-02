@@ -4,8 +4,13 @@
 
 @section('content')
 <div class="page-header">
-    <h3 class="page-title">Dashboard</h3>
+    <h3 class="page-title">
+        <span class="page-title-icon bg-gradient-primary text-white me-2">
+            <i class="mdi mdi-home"></i>
+        </span> Dashboard
+    </h3>
     <h6>Selamat datang, {{ Auth::user()->name }}</h6>
+    
 </div>
 <br>
 

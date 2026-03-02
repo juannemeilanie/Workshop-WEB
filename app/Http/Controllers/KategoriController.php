@@ -34,9 +34,9 @@ class KategoriController extends Controller
     }
 
     protected function validateKategori(Request $request, $id = null){
-        $uniqueRule = $id ? 
-        'unique:kategori,' . $id . ',idkategori': 
-        'unique:kategori';
+        $uniqueRule = $id
+            ? 'unique:kategori,nama_kategori,' . $id . ',idkategori'
+            : 'unique:kategori,nama_kategori';
 
         return $request->validate([
             'nama_kategori' => 'required|string|max:255|' . $uniqueRule,
@@ -44,7 +44,20 @@ class KategoriController extends Controller
             'nama_kategori.required' => 'Nama Kategori wajib diisi.',
             'nama_kategori.string' => 'Nama Kategori harus berupa teks.',
             'nama_kategori.max' => 'Nama Kategori maksimal 255 karakter.',
+            'nama_kategori.unique' => 'Nama Kategori sudah ada.',
         ]);
+
+    }
+
+    public function update(Request $request, $id){
+        $validatedData = $this->validateKategori($request, $id);
+
+        DB::table('kategori')->where('idkategori', $id)->update([
+            'nama_kategori' => $validatedData['nama_kategori'],
+        ]);
+
+        return redirect()->route('kategori.index')
+                        ->with('success', 'Kategori berhasil diperbarui.');
     }
 
     protected function createKategori(array $data){

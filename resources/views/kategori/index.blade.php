@@ -43,7 +43,7 @@
         <tbody>
             @foreach($kategori as $k)
             <tr>
-                <td>{{ $k->idkategori }}</td>
+                <td>{{ $loop->iteration }}</td>
                 <td>{{ $k->nama_kategori }}</td>
                 <td>
                     <form action="{{ route('kategori.edit', $k->idkategori) }}" method="GET" style="display: inline;">

@@ -5,7 +5,7 @@
     <style>
         @page {
             size: A4 landscape;
-            margin: 0;
+            margin: 25px;
         }
 
         body {
@@ -19,7 +19,11 @@
 
         .certificate {
             border: 8px double #000;
-            padding: 40px;
+            padding: 20px;
+            width: 95%;
+            height: 90%;
+            justify-content: center;
+            align-items: center;
         }
 
         .title {
@@ -27,6 +31,7 @@
             font-weight: bold;
             letter-spacing: 3px;
             margin-bottom: 20px;
+            margin-top: 50px;
         }
 
         .subtitle {

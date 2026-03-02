@@ -80,9 +80,12 @@ class LoginController extends Controller
     }
 
     public function googleCallback(){
+        try{
         $googleUser = Socialite::driver('google')->user();
         $user = User::where('email',$googleUser->email)->first();
-        if(!$user){
+        if($user){
+            $user->update(['id_google' => $googleUser->id]); 
+        } else{
             $user = User::create([
                 'name' => $googleUser->name,
                 'email' => $googleUser->email,
@@ -102,7 +105,10 @@ class LoginController extends Controller
             session(['otp_user_id' => $user->id]);
 
             return redirect()->route('otp.form');
-
+        } catch (\Exception $e) {
+                    return redirect()->route('login')
+                        ->withErrors(['error' => 'Gagal login dengan Google. Silakan coba lagi.']);
+        }
     }
     
 

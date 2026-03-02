@@ -36,6 +36,13 @@
             </li>
 
             <li class="nav-item">
+              <a class="nav-link" href="{{ route('barang.index') }}">
+                <span class="menu-title">Barang</span>
+                <i class="fa fa-inbox menu-icon"></i>
+              </a>
+            </li>
+
+            <li class="nav-item">
               <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
                 <span class="menu-title">Download PDF</span>
                 <i class="menu-arrow"></i>

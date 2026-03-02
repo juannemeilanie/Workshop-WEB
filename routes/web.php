@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\BarangController;
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KategoriController;
@@ -48,4 +49,12 @@ Route::get('/buku/{id}/edit', [BukuController::class, 'edit'])->name('buku.edit'
 Route::put('/buku/{id}/update', [BukuController::class, 'update'])->name('buku.update');
 Route::delete('/buku/{id}/destroy', [BukuController::class, 'destroy'])->name('buku.destroy');
 
+// barang
+Route::get('/barang', [BarangController::class, 'index'])->name('barang.index');
+Route::get('/barang/create', [BarangController::class, 'create'])->name('barang.create');
+Route::post('/barang/store', [BarangController::class, 'store'])->name('barang.store');
+Route::get('/barang/{id}/edit', [BarangController::class, 'edit'])->name('barang.edit');
+Route::put('/barang/{id}/update', [BarangController::class, 'update'])->name('barang.update');
+Route::delete('/barang/{id}/destroy', [BarangController::class, 'destroy'])->name('barang.destroy');
+Route::get('/barang/cetak', [BarangController::class, 'cetak'])->name('barang.cetak');
 });

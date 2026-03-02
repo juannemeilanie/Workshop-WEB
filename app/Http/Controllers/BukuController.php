@@ -38,10 +38,24 @@ class BukuController extends Controller
         return view('buku.edit', compact('buku', 'kategori'));
     }
 
+    public function update(Request $request, $id){
+        $validatedData = $this->validateBuku($request, $id);
+
+        DB::table('buku')->where('idbuku', $id)->update([
+            'kode' => $validatedData['kode'],
+            'judul' => $validatedData['judul'],
+            'pengarang' => $validatedData['pengarang'],
+            'idkategori' => $validatedData['idkategori'],
+        ]);
+
+        return redirect()->route('buku.index')
+                        ->with('success', 'Buku berhasil diperbarui.');
+    }
+
     protected function validateBuku(Request $request, $id = null){
-        $uniqueRule = $id ? 
-        'unique:buku,' . $id . ',idbuku': 
-        'unique:buku';
+        $uniqueRule = $id
+            ? 'unique:buku,kode,' . $id . ',idbuku'
+            : 'unique:buku,kode';
 
         return $request->validate([
             'kode' => 'required|string|max:5|' . $uniqueRule,
@@ -52,6 +66,7 @@ class BukuController extends Controller
             'kode.required' => 'Kode wajib diisi.',
             'kode.string' => 'Kode harus berupa teks.',
             'kode.max' => 'Kode maksimal 5 karakter.',
+            'kode.unique' => 'Kode buku sudah digunakan.',
 
             'judul.required' => 'Judul wajib diisi.',
             'judul.string' => 'Judul harus berupa teks.',

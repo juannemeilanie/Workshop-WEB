@@ -12,7 +12,7 @@ class PdfController extends Controller
         $pdf = Pdf::loadView('pdf.sertifikat')
             ->setPaper('A4', 'landscape');
 
-        return $pdf->download('sertifikat.pdf');
+        return $pdf->stream('sertifikat.pdf');
     }
 
     public function undangan()
@@ -20,6 +20,6 @@ class PdfController extends Controller
         $pdf = Pdf::loadView('pdf.undangan')
             ->setPaper('A4', 'portrait');
 
-        return $pdf->download('undangan.pdf');
+        return $pdf->stream('undangan.pdf');
     }
 }
