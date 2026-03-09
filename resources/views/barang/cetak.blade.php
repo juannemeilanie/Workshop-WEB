@@ -10,15 +10,15 @@
         body {
             margin:0;
             font-family: Arial, sans-serif;
-            background-color: #f0f5b5;
             width: 210mm;
-            height: 167mm;
+            height: 165mm;
+            background-color: #edf4b7;
         }
 
         table {
-            border-collapse: separate; 
-            border-spacing: 2mm 2mm; 
-            margin: 0 auto;
+            border-spacing: 3mm 2mm; 
+            margin: auto;
+            position: absolute;
         }
 
         td {

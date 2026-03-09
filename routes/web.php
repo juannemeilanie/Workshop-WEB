@@ -57,4 +57,10 @@ Route::get('/barang/{id}/edit', [BarangController::class, 'edit'])->name('barang
 Route::put('/barang/{id}/update', [BarangController::class, 'update'])->name('barang.update');
 Route::delete('/barang/{id}/destroy', [BarangController::class, 'destroy'])->name('barang.destroy');
 Route::get('/barang/cetak', [BarangController::class, 'cetak'])->name('barang.cetak');
+
+Route::get('/table', function () {return view('table.Table-html');})->name('Table');
+Route::get('/table/datatables', function () {return view('table.datatables');})->name('Datatables');
+
+Route::get('/kota', function () {return view('kota');})->name('kota');
+
 });

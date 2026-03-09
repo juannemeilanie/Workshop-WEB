@@ -28,44 +28,23 @@
             </div>
         @endif
 
-        <form action="{{ route('buku.update', $buku->idbuku) }}" method="POST">
+        <form id="formEditBuku" action="{{ route('buku.update', $buku->idbuku) }}" method="POST">
             @csrf
             @method('PUT')
 
             <div class="form-group">
                 <label for="kode">Kode:</label>
-                <input
-                    type="text"
-                    class="form-control"
-                    id="kode"
-                    name="kode"
-                    value="{{ old('kode', $buku->kode) }}"
-                    required
-                >
+                <input type="text" class="form-control" id="kode" name="kode" value="{{ old('kode', $buku->kode) }}" required>
             </div>
 
             <div class="form-group">
                 <label for="judul">Judul:</label>
-                <input
-                    type="text"
-                    class="form-control"
-                    id="judul"
-                    name="judul"
-                    value="{{ old('judul', $buku->judul) }}"
-                    required
-                >
+                <input type="text" class="form-control" id="judul" name="judul" value="{{ old('judul', $buku->judul) }}" required>
             </div>
 
             <div class="form-group">
                 <label for="pengarang">Pengarang:</label>
-                <input
-                    type="text"
-                    class="form-control"
-                    id="pengarang"
-                    name="pengarang"
-                    value="{{ old('pengarang', $buku->pengarang) }}"
-                    required
-                >
+                <input type="text" class="form-control" id="pengarang" name="pengarang" value="{{ old('pengarang', $buku->pengarang) }}" required>
             </div>
 
             <div class="form-group">
@@ -73,10 +52,7 @@
                 <select class="form-control" id="kategori" name="idkategori" required>
                     @foreach($kategori as $k)
                         <option
-                            value="{{ $k->idkategori }}"
-                            {{ old('idkategori', $buku->idkategori) == $k->idkategori ? 'selected' : '' }}
-                        >
-                            {{ $k->nama_kategori }}
+                            value="{{ $k->idkategori }}" {{ old('idkategori', $buku->idkategori) == $k->idkategori ? 'selected' : '' }} > {{ $k->nama_kategori }}
                         </option>
                     @endforeach
                 </select>
@@ -85,7 +61,7 @@
             <a href="{{ route('buku.index') }}" class="btn btn-rounded btn-gradient-secondary">
                 Kembali
             </a>
-            <button type="submit" class="btn btn-rounded btn-gradient-primary">
+            <button type="button" class="btn btn-rounded btn-gradient-primary btn-spinner" data-form="formEditBuku">
                 Update
             </button>
         </form>

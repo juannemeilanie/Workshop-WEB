@@ -39,16 +39,37 @@
               <a class="nav-link" href="{{ route('barang.index') }}">
                 <span class="menu-title">Barang</span>
                 <i class="fa fa-inbox menu-icon"></i>
-              </a>
+              </a>  
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+              <a class="nav-link" data-bs-toggle="collapse" href="#menu-tabel" aria-expanded="false">
+                <span class="menu-title">Tabel</span>
+                <i class="menu-arrow"></i>
+                <i class="fa fa-table menu-icon"></i>
+              </a>
+              <div class="collapse show" id="menu-tabel" data-bs-parent="#sidebar">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ route('Table') }}">Tabel Barang</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ route('Datatables') }}">Datatables Barang</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ route('kota') }}">Kota</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="collapse" href="#menu-pdf" aria-expanded="false" aria-controls="menu-pdf">
                 <span class="menu-title">Download PDF</span>
                 <i class="menu-arrow"></i>
                 <i class="fa fa-download menu-icon"></i>
               </a>
-              <div class="collapse" id="ui-basic">
+              <div class="collapse" id="menu-pdf">
                 <ul class="nav flex-column sub-menu">
                   <li class="nav-item">
                     <a class="nav-link" href="{{ route('pdf.sertifikat') }}">Sertifikat</a>

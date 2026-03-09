@@ -27,7 +27,7 @@
             </div>
         @endif
 
-        <form action="{{ route('buku.store') }}" method="POST">
+        <form id="formTambahBuku" action="{{ route('buku.store') }}" method="POST">
             @csrf
             <div class="form-group">
                 <label for="kode">Kode:</label>
@@ -50,7 +50,7 @@
                 </select>
             </div>
             <a href="{{ route('buku.index') }}" class="btn btn-rounded btn-gradient-secondary">Kembali</a>
-            <button type="submit" class="btn btn-rounded btn-gradient-primary">Simpan</button>
+            <button type="button" class="btn btn-rounded btn-gradient-primary btn-spinner" data-form="formTambahBuku">Simpan</button>
         </form>
     </div>
 </div>

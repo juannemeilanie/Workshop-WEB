@@ -28,28 +28,17 @@
             </div>
         @endif
 
-        <form action="{{ route('kategori.update', $kategori->idkategori) }}" method="POST">
+        <form id="formEditKategori" action="{{ route('kategori.update', $kategori->idkategori) }}" method="POST">
             @csrf
             @method('PUT')
 
             <div class="form-group">
                 <label for="nama_kategori">Nama Kategori:</label>
-                <input 
-                    type="text" 
-                    class="form-control" 
-                    id="nama_kategori" 
-                    name="nama_kategori"
-                    value="{{ old('nama_kategori', $kategori->nama_kategori) }}"
-                    required
-                >
+                <input type="text" class="form-control" id="nama_kategori" name="nama_kategori" value="{{ old('nama_kategori', $kategori->nama_kategori) }}" required>
             </div>
 
-            <a href="{{ route('kategori.index') }}" class="btn btn-rounded btn-gradient-secondary">
-                Kembali
-            </a>
-            <button type="submit" class="btn btn-rounded btn-gradient-primary">
-                Update
-            </button>
+            <a href="{{ route('kategori.index') }}" class="btn btn-rounded btn-gradient-secondary"> Kembali</a>
+            <button type="button" class="btn btn-rounded btn-gradient-primary btn-spinner" data-form="formEditKategori">Update</button>
         </form>
     </div>
 </div>

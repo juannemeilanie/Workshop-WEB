@@ -95,7 +95,7 @@ class BarangController extends Controller
 
     $mm = 2.83465; 
     $pdf = Pdf::loadView('barang.cetak', compact('labels'))
-        ->setPaper([0, 0, 210 * $mm, 167 * $mm], 'potrait');
+        ->setPaper([0, 0, 210 * $mm, 165 * $mm], 'potrait');
     return $pdf->stream('tag-harga.pdf');
     }
 }

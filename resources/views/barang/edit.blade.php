@@ -28,7 +28,7 @@
             </div>
         @endif
 
-        <form action="{{ route('barang.update', $barang->id_barang) }}" method="POST">
+        <form id="formEditBarang" action="{{ route('barang.update', $barang->id_barang) }}" method="POST">
             @csrf
             @method('PUT')
 
@@ -44,9 +44,7 @@
             <a href="{{ route('barang.index') }}" class="btn btn-rounded btn-gradient-secondary">
                 Kembali
             </a>
-            <button type="submit" class="btn btn-rounded btn-gradient-primary">
-                Update
-            </button>
+            <button type="button" class="btn btn-rounded btn-gradient-primary btn-spinner" data-form="formEditBarang" >Update </button>
         </form>
     </div>
 </div>

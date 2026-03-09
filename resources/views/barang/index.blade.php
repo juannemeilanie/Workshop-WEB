@@ -83,7 +83,7 @@
                                 <a href="{{ route('barang.destroy', $b->id_barang) }}" method="POST" style="display: inline;" onsubmit="return confirm('Apakah Anda yakin ingin menghapus barang ini?');">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-rounded btn-gradient-danger">
+                                    <button type="button" class="btn btn-sm btn-rounded btn-gradient-danger">
                                         <i class="fa fa-trash"></i> Hapus
                                     </button>
                                 </a>

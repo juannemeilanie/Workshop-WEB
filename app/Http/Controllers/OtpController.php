@@ -27,12 +27,12 @@ class OtpController extends Controller
                 ->withErrors(['otp' => 'Session OTP habis. Silakan login ulang.']);
         }
 
-        $user = User::find($userId);
+        $user = User::where('id', $userId)->first();
 
         if (!$user || $user->otp !== $request->otp) {
             return back()->withErrors(['otp' => 'OTP salah']);
         }
-
+        
 
         $user->update([
             'otp' => null,

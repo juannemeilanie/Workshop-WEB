@@ -23,6 +23,7 @@
             @include('layout.footer')
             @include('layout.javascript global')
             @include('layout.javascript page')
+            @stack('scripts')
         </div>
 
     </div>
