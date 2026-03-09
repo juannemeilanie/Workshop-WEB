@@ -57,7 +57,7 @@
 
                 <div class="mb-3">
                     <label class="form-label">Select Kota</label>
-                    <select id="selectKota2" class="form-select" >
+                    <select id="selectKota2" class="form-select" multiple>
                         <option value="">-- Pilih Kota --</option>
                     </select>
                 </div>
