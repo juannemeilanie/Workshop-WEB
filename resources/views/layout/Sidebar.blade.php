@@ -48,7 +48,7 @@
                 <i class="menu-arrow"></i>
                 <i class="fa fa-table menu-icon"></i>
               </a>
-              <div class="collapse show" id="menu-tabel" data-bs-parent="#sidebar">
+              <div class="collapse" id="menu-tabel" data-bs-parent="#sidebar">
                 <ul class="nav flex-column sub-menu">
                   <li class="nav-item">
                     <a class="nav-link" href="{{ route('Table') }}">Tabel Barang</a>
@@ -76,6 +76,39 @@
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="{{ route('pdf.undangan') }}">Undangan</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="collapse" href="#wilayah" aria-expanded="false" aria-controls="wilayah">
+                <span class="menu-title">Wilayah</span>
+                <i class="menu-arrow"></i>
+                <i class="fa fa-location-arrow menu-icon"></i>
+              </a>
+              <div class="collapse" id="wilayah">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ route('wilayah.index') }}">Wilayah</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="collapse" href="#pos" aria-expanded="false" aria-controls="pos">
+                <span class="menu-title">POS</span>
+                <i class="menu-arrow"></i>
+                <i class="fa fa-money menu-icon"></i>
+              </a>
+              <div class="collapse" id="pos">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ route('pos.index1') }}">JQuery</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ route('pos.index2') }}">Axios</a>
                   </li>
                 </ul>
               </div>

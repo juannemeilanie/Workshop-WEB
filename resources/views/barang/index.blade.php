@@ -80,13 +80,13 @@
                                 <a href="{{ route('barang.edit', $b->id_barang) }}" class="btn btn-sm btn-rounded btn-gradient-warning">
                                     <i class="fa fa-edit"></i> Edit
                                 </a>
-                                <a href="{{ route('barang.destroy', $b->id_barang) }}" method="POST" style="display: inline;" onsubmit="return confirm('Apakah Anda yakin ingin menghapus barang ini?');">
+                                <form id="formHapusBarang{{ $b->id_barang }}" action="{{ route('barang.destroy', $b->id_barang) }}" method="POST" style="display: inline;" onclick="return confirm('Apakah Anda yakin ingin menghapus barang ini?');">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="button" class="btn btn-sm btn-rounded btn-gradient-danger">
+                                    <button type="button" class="btn btn-sm btn-rounded btn-gradient-danger btn-spinner" data-form="formHapusBarang{{ $b->id_barang }}">
                                         <i class="fa fa-trash"></i> Hapus
                                     </button>
-                                </a>
+                                </form>
                             </td>
                         </tr>
                     @endforeach

@@ -94,12 +94,6 @@
 <script>
 $(document).ready(function(){
 
-    $('#selectKota2').select2({
-        placeholder:'-- Pilih Kota --',
-        width:'100%'
-    });
-
-
     $('#btnTambahKota1').click(function(){
         let kota = $('#inputKota1').val().trim();
         if(kota == '') return;
@@ -112,6 +106,12 @@ $(document).ready(function(){
     $('#selectKota1').change(function(){
         let kota = $(this).val();
         $('#kotaTerpilih1').text(kota || '-');
+    });
+
+    
+    $('#selectKota2').select2({
+        placeholder:'-- Pilih Kota --',
+        width:'100%'
     });
 
     $('#btnTambahKota2').click(function(){

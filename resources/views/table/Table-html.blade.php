@@ -55,7 +55,6 @@
 @push('scripts')
 <script>
 let counter = 1;
-let selectedRow = null;
 
 function tampilkan()
 {
@@ -112,17 +111,6 @@ function resetBtn()
     $('#btnTambahBarang')
         .html('Tambah')
         .prop('disabled', false);
-}
-
-function pilihRow(row)
-{
-    selectedRow = row;
-
-    const nama = row.cells[1].innerText;
-    const harga = row.cells[2].innerText.replace('Rp','').replace(/\./g,'');
-
-    document.getElementById('nama').value = nama;
-    document.getElementById('harga').value = harga;
 }
 
 </script>

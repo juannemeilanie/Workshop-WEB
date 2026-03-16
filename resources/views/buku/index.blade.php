@@ -56,10 +56,10 @@
                             <i class="fa fa-edit"></i> Edit
                         </button>
                     </form>
-                    <form action="{{ route('buku.destroy', $b->idbuku) }}" method="POST" style="display: inline;" onsubmit="return confirm('Apakah Anda yakin ingin menghapus buku ini?');">
+                    <form id="formHapusBuku{{ $b->idbuku }}" action="{{ route('buku.destroy', $b->idbuku) }}" method="POST" style="display: inline;" onclick="return confirm('Apakah Anda yakin ingin menghapus buku ini?');">
                         @csrf
                         @method('DELETE')
-                        <button type="button" class="btn btn-sm btn-rounded btn-gradient-danger">
+                        <button type="button" class="btn btn-sm btn-rounded btn-gradient-danger btn-spinner" data-form="formHapusBuku{{ $b->idbuku }}">
                             <i class="fa fa-trash"></i> Hapus
                         </button>
                     </form>
