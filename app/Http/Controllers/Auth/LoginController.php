@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Mail\OtpMail;
 use App\Models\User;
+use App\Models\Vendor;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -66,8 +67,19 @@ class LoginController extends Controller
     if (Auth::attempt($credentials)) {
         $request->session()->regenerate();
 
-        return redirect()->route('dashboard')
-            ->with('success', 'Login berhasil');
+        $request->session()->forget('vendor_id');
+
+        $user = Auth::user();
+
+        $vendor = Vendor::where('user_id', $user->id)->first();
+
+        if ($vendor) {
+            session(['vendor_id' => $vendor->idvendor]);
+
+            return redirect('/vendor/dashboard');
+        }
+
+        return redirect()->route('dashboard');
     }
 
     return back()->withErrors([
