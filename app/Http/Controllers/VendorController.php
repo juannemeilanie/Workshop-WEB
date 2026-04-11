@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Menu;
-use App\Models\Pesanan;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -19,6 +18,15 @@ class VendorController extends Controller
         return session('vendor_id');
     }
 
+    public function index()
+    {
+       $vendors = DB::table('vendor')
+            ->join('users', 'vendor.user_id', '=', 'users.id')
+            ->select('vendor.*', 'users.name as nama_user')
+            ->get();
+        return view('vendor.admin.daftar', compact('vendors'));
+    }
+
     public function dashboard()
     {
         $vendorId = $this->getVendorId();
@@ -30,15 +38,22 @@ class VendorController extends Controller
             ->join('menu', 'detail_pesanan.idmenu', '=', 'menu.idmenu')
             ->where('menu.idvendor', $vendorId)
             ->where('pesanan.status_bayar', 1)
-            ->select('pesanan.idpesanan', 'pesanan.total')
-            ->groupBy('pesanan.idpesanan', 'pesanan.total')
+            ->select(
+                'pesanan.idpesanan',
+                'pesanan.nama',
+                'pesanan.total',
+                'pesanan.created_at',
+                DB::raw("STRING_AGG(menu.nama_menu || ' x' || detail_pesanan.jumlah, ', ') as items")
+            )
+            ->groupBy('pesanan.idpesanan', 'pesanan.nama', 'pesanan.total', 'pesanan.created_at')
+            ->orderBy('pesanan.created_at', 'desc')
             ->get();
 
         $totalPesanan = $pesananVendor->count();
         $totalPendapatan = $pesananVendor->sum('total');
         $totalMenu = Menu::where('idvendor', $vendorId)->count();
 
-        return view('vendor.dashboard', compact('vendor', 'totalMenu', 'totalPesanan', 'totalPendapatan'));
+        return view('vendor.dashboard', compact('vendor', 'totalMenu', 'totalPesanan', 'totalPendapatan', 'pesananVendor'));
     }
 
     public function menu()

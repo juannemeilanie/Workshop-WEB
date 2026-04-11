@@ -40,5 +40,52 @@
             </div>
         </div>
     </div>
+
+    <div class="card mt-4">
+        <div class="card-body">
+            <h4 class="mb-3">Pesanan Lunas Terbaru</h4>
+
+            @if($pesananVendor->isEmpty())
+                <div class="text-center py-4">
+                    <p class="text-muted">Belum ada pesanan lunas.</p>
+                </div>
+            @else
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th>No</th>
+                            <th>Nama Customer</th>
+                            <th>Detail Menu</th>
+                            <th>Total</th>
+                            <th>Waktu Pesan</th>
+                            <th class="text-center">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($pesananVendor as $i => $p)
+                        <tr>
+                            <td>{{ $i + 1 }}</td>
+                            <td>{{ $p->nama }}</td>
+                            <td class="text-muted small">{{ $p->items }}</td>
+                            <td class="fw-bold text-primary">
+                                Rp {{ number_format($p->total, 0, ',', '.') }}
+                            </td>
+                            <td class="text-muted small">
+                                {{ \Carbon\Carbon::parse($p->created_at)->format('d M Y, H:i') }}
+                            </td>
+                            <td class="text-center">
+                                <span class="badge bg-success">
+                                    <i class="mdi mdi-check me-1"></i> Lunas
+                                </span>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            @endif
+        </div>
+    </div>
 </div>
 @endsection

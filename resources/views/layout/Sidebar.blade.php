@@ -121,6 +121,13 @@
   </li>
 
   <li class="nav-item">
+      <a class="nav-link" href="{{ route('vendor.daftar') }}">
+          <span class="menu-title">Data Vendor</span>
+          <i class="fa fa-shopping-cart menu-icon"></i>
+      </a>
+  </li>
+
+  <li class="nav-item">
     <a class="nav-link" data-bs-toggle="collapse" href="#menu-pdf" aria-expanded="false" aria-controls="menu-pdf">
       <span class="menu-title">Download PDF</span>
       <i class="menu-arrow"></i>

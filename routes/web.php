@@ -67,19 +67,20 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/table/datatables', function () {return view('table.datatables');})->name('Datatables');
     Route::get('/table/kota', function () {return view('table.kota');})->name('kota');
 
-
     Route::get('/wilayah', [WilayahController::class, 'index'])->name('wilayah.index');
     Route::get('/wilayah/provinsi', [WilayahController::class, 'getProvinsi'])->name('wilayah.provinsi');
     Route::post('/wilayah/kota', [WilayahController::class, 'getKota'])->name('wilayah.kota');
     Route::post('/wilayah/kecamatan', [WilayahController::class, 'getKecamatan'])->name('wilayah.kecamatan');
     Route::post('/wilayah/kelurahan', [WilayahController::class, 'getKelurahan'])->name('wilayah.kelurahan');
 
-
     Route::get('/pos/jquery', [PosController::class, 'index1'])->name('pos.index1');
     Route::get('/pos/axios', [PosController::class, 'index2'])->name('pos.index2');
     Route::get('/pos/barang/{id}', [PosController::class, 'getBarang'])->name('pos.barang');
     Route::post('/simpan-transaksi', [PosController::class, 'simpan'])->name('pos.simpan');
     Route::post('/simpan-transaksi-axios',[PosController::class, 'simpanAxios'])->name('pos.simpan.axios');
+
+    Route::get('/data/vendor', [VendorController::class, 'index'])->name('vendor.daftar');
+    
 
     // VENDOR
     Route::get('/vendor/dashboard', [VendorController::class, 'dashboard']);
@@ -91,6 +92,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/vendor/menu/{id}', [VendorController::class, 'destroy'])->name('vendor.menu.delete');
     Route::get('/vendor/pesanan', [VendorController::class, 'pesanan'])->name('vendor.pesanan.index');
 
+    
 
 });
 
