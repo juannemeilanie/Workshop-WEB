@@ -18,11 +18,6 @@
     <div class="d-flex justify-content-between mb-3">
         <h4>Data Vendor</h4>
     </div>
-
-    @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
-
         <div class="table-responsive">
             <table class="table table-striped" border="1" cellpadding="8" cellspacing="0">
                 <thead>

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class VendorController extends Controller
 {
-     private function getVendorId()
+    private function getVendorId()
     {
         if (!session('vendor_id')) {
             abort(403);
@@ -30,7 +30,6 @@ class VendorController extends Controller
     public function dashboard()
     {
         $vendorId = $this->getVendorId();
-
         $vendor = Vendor::find($vendorId);
 
         $pesananVendor = DB::table('pesanan')
@@ -43,9 +42,10 @@ class VendorController extends Controller
                 'pesanan.nama',
                 'pesanan.total',
                 'pesanan.created_at',
+                'pesanan.status_bayar',
                 DB::raw("STRING_AGG(menu.nama_menu || ' x' || detail_pesanan.jumlah, ', ') as items")
             )
-            ->groupBy('pesanan.idpesanan', 'pesanan.nama', 'pesanan.total', 'pesanan.created_at')
+            ->groupBy('pesanan.idpesanan', 'pesanan.nama', 'pesanan.total', 'pesanan.created_at', 'pesanan.status_bayar')
             ->orderBy('pesanan.created_at', 'desc')
             ->get();
 
@@ -132,13 +132,41 @@ class VendorController extends Controller
                 'pesanan.nama',
                 'pesanan.total',
                 'pesanan.created_at',
+                'pesanan.status_bayar',
                 DB::raw("STRING_AGG(menu.nama_menu || ' x' || detail_pesanan.jumlah, ', ') as items")
             )
-            ->groupBy('pesanan.idpesanan', 'pesanan.nama', 'pesanan.total', 'pesanan.created_at')
+            ->groupBy('pesanan.idpesanan', 'pesanan.nama', 'pesanan.total', 'pesanan.created_at', 'pesanan.status_bayar')
             ->orderBy('pesanan.created_at', 'desc')
             ->get();
 
         return view('vendor.pesanan.index', compact('pesanan'));
+    }
+
+    public function detailPesanan($id)
+    {
+        $vendorId = $this->getVendorId();
+
+        $pesanan = DB::table('pesanan')
+            ->where('idpesanan', $id)
+            ->first();
+
+        $items = DB::table('detail_pesanan')
+            ->join('menu', 'detail_pesanan.idmenu', '=', 'menu.idmenu')
+            ->where('detail_pesanan.idpesanan', $id)
+            ->where('menu.idvendor', $vendorId)
+            ->select(
+                'menu.nama_menu',
+                'detail_pesanan.jumlah',
+                'detail_pesanan.harga',
+                'detail_pesanan.subtotal'
+            )
+            ->get();
+
+        if ($items->isEmpty()) {
+            abort(403);
+        }
+
+        return view('vendor.pesanan.detail', compact('pesanan', 'items'));
     }
 
 

@@ -56,7 +56,7 @@ document.getElementById('bayar').onclick = function(){
 
                 onSuccess: function(result){
                     alert("Pembayaran berhasil!");
-                    window.location.href = "/"; 
+                    window.location.href = "/payment/success/{{ $pesanan->idpesanan }}";
                 },
 
                 onPending: function(result){

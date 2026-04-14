@@ -126,6 +126,12 @@
           <i class="fa fa-shopping-cart menu-icon"></i>
       </a>
   </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ route('customer.index') }}">
+          <span class="menu-title">Data Customer</span>
+          <i class="fa fa-vcard menu-icon"></i>
+      </a>
+  </li>
 
   <li class="nav-item">
     <a class="nav-link" data-bs-toggle="collapse" href="#menu-pdf" aria-expanded="false" aria-controls="menu-pdf">

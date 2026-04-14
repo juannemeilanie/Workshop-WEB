@@ -58,6 +58,11 @@
             margin-top: 4px;
             text-transform: uppercase;
         }
+        .barcode img {
+            margin-top: 2px;
+            width: 75%;
+            height: 20px;
+        }
     </style>
 </head>
 <body>
@@ -73,6 +78,9 @@
             <td>
                 <div class="nama">{{ $labels[$pos]->nama }}</div>
                 <div class="harga">Rp {{ number_format($labels[$pos]->harga, 0, ',', '.') }}</div>
+                <div class="barcode">
+                    <img src="data:image/png;base64,{{ $labels[$pos]->barcode }}">
+                </div>
                 <div class="id">{{ $labels[$pos]->id_barang }}</div>
             </td>
             @else
@@ -82,5 +90,6 @@
 </tr>
 @endfor
 </table>
+
 </body>
 </html>

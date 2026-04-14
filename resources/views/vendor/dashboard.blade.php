@@ -51,7 +51,7 @@
                 </div>
             @else
             <div class="table-responsive">
-                <table class="table table-hover">
+                <table class="table table-striped" border="1" cellpadding="8" cellspacing="0">
                     <thead class="table-light">
                         <tr>
                             <th>No</th>
@@ -67,7 +67,7 @@
                         <tr>
                             <td>{{ $i + 1 }}</td>
                             <td>{{ $p->nama }}</td>
-                            <td class="text-muted small">{{ $p->items }}</td>
+                            <td>{{ $p->items }}</td>
                             <td class="fw-bold text-primary">
                                 Rp {{ number_format($p->total, 0, ',', '.') }}
                             </td>
@@ -75,8 +75,10 @@
                                 {{ \Carbon\Carbon::parse($p->created_at)->format('d M Y, H:i') }}
                             </td>
                             <td class="text-center">
-                                <span class="badge bg-success">
-                                    <i class="mdi mdi-check me-1"></i> Lunas
+                                <span class="badge 
+                                    {{ $p->status_bayar == 1 ? 'bg-gradient-success' : ($p->status_bayar == 0 ? 'bg-gradient-warning' : 'bg-gradient-danger') }}">
+                                    
+                                    {{ $p->status_bayar == 1 ? 'Lunas' : ($p->status_bayar == 0 ? 'Pending' : 'Gagal') }}
                                 </span>
                             </td>
                         </tr>

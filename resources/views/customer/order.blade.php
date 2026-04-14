@@ -35,33 +35,33 @@ function loadMenu(id){
     let v = vendors.find(x => x.idvendor == id);
     let html = '';
 
-v.menu.forEach((m,i) => {
-    html += `
-    <div class="col-md-3 mb-3">
-        <div class="card">
-            <img src="/storage/${m.path_gambar}" style="height:180px; object-fit:cover;">
-            <div class="card-body text-center">
-                <h6>${m.nama_menu}</h6>
-                <p>Rp ${m.harga}</p>
+    v.menu.forEach((m,i) => {
+        html += `
+        <div class="col-md-3 mb-3">
+            <div class="card">
+                <img src="/storage/${m.path_gambar}" style="height:180px; object-fit:cover;">
+                <div class="card-body text-center">
+                    <h6>${m.nama_menu}</h6>
+                    <p>Rp ${m.harga}</p>
 
-                <button type="button"  class="btn btn-sm btn-rounded btn-gradient-success" onclick="kurang(${i})">-</button>
-                
-                <input  
-                    id="qty${i}" 
-                    name="menu[${i}][qty]" 
-                    value="0" 
-                    readonly 
-                    style="width:50px; text-align:center; border:none;">
+                    <button type="button"  class="btn btn-sm btn-rounded btn-gradient-success" onclick="kurang(${i})">-</button>
+                    
+                    <input  
+                        id="qty${i}" 
+                        name="menu[${i}][qty]" 
+                        value="0" 
+                        readonly 
+                        style="width:50px; text-align:center; border:none;">
 
-                <button type="button" class="btn btn-sm btn-rounded btn-gradient-success" onclick="tambah(${i})">+</button>
+                    <button type="button" class="btn btn-sm btn-rounded btn-gradient-success" onclick="tambah(${i})">+</button>
 
-                <input type="hidden" name="menu[${i}][id]" value="${m.idmenu}">
-                <input type="hidden" name="menu[${i}][harga]" value="${m.harga}">
+                    <input type="hidden" name="menu[${i}][id]" value="${m.idmenu}">
+                    <input type="hidden" name="menu[${i}][harga]" value="${m.harga}">
+                </div>
             </div>
         </div>
-    </div>
-    `;
-});
+        `;
+    });
 
     document.getElementById('menuList').innerHTML = html;
 }
@@ -84,21 +84,6 @@ document.getElementById('vendor').addEventListener('change', function(){
     loadMenu(this.value);
 });
 
-loadMenu(document.getElementById('vendor').value);
-
-document.querySelector('form').addEventListener('submit', function(e){
-    let qtyInputs = document.querySelectorAll('input[name*="[qty]"]');
-    let valid = false;
-
-    qtyInputs.forEach(i => {
-        if (parseInt(i.value) > 0) valid = true;
-    });
-
-    if (!valid) {
-        e.preventDefault();
-        alert("Pilih minimal 1 menu!");
-    }
-});
 </script>
 
 @endsection

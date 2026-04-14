@@ -27,7 +27,7 @@
         </div>
     @else
     <div class="table-responsive">
-        <table class="table table-hover">
+        <table class="table table-striped" border="1" cellpadding="8" cellspacing="0">
             <thead class="table-light">
                 <tr>
                     <th>No</th>
@@ -36,6 +36,7 @@
                     <th>Total</th>
                     <th>Waktu Pesan</th>
                     <th class="text-center">Status</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -51,9 +52,17 @@
                             {{ \Carbon\Carbon::parse($p->created_at)->format('d M Y, H:i') }}
                         </td>
                         <td class="text-center">
-                            <span class="badge bg-success">
-                                <i class="mdi mdi-check me-1"></i>Lunas
+                            <span class="badge 
+                                {{ $p->status_bayar == 1 ? 'bg-gradient-success' : ($p->status_bayar == 0 ? 'bg-gradient-warning' : 'bg-gradient-danger') }}">
+                                
+                                {{ $p->status_bayar == 1 ? 'Lunas' : ($p->status_bayar == 0 ? 'Pending' : 'Gagal') }}
                             </span>
+                        </td>
+                        <td class="text-center">
+                            <a href="{{ route('vendor.pesanan.detail', $p->idpesanan) }}" 
+                            class="btn btn-sm btn-rounded btn-gradient-info">
+                                <i class="mdi mdi-eye"></i> Detail
+                            </a>
                         </td>
                     </tr>
                 @endforeach
