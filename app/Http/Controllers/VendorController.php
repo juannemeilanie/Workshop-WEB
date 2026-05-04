@@ -177,5 +177,69 @@ class VendorController extends Controller
 
         return redirect()->route('vendor.menu.index')->with('success','Menu berhasil dihapus');
     }
+
+    public function scanPage()
+    {
+        return view('vendor.pesanan.scan');
+    }
+
+    public function readQrCode(Request $request)
+    {
+        $vendorId = session('vendor_id');
+        $idpesanan = $request->idpesanan;
+
+        $pesanan = DB::table('pesanan')
+            ->where('idpesanan', $idpesanan)
+            ->first();
+
+        if (!$pesanan) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Pesanan tidak ditemukan!'
+            ]);
+        }
+
+        $query = DB::table('detail_pesanan')
+            ->join('menu', 'detail_pesanan.idmenu', '=', 'menu.idmenu')
+            ->where('detail_pesanan.idpesanan', $idpesanan)
+            ->select(
+                'menu.nama_menu',
+                'detail_pesanan.jumlah',
+                'detail_pesanan.harga',
+                'detail_pesanan.subtotal'
+            );
+
+        if ($vendorId) {
+            $query->where('menu.idvendor', $vendorId);
+        }
+
+        $items = $query->get();
+
+        if ($items->isEmpty()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Tidak ada menu untuk pesanan ini!'
+            ]);
+        }
+
+        $statusBayar = match((int) $pesanan->status_bayar) {
+            1       => 'Lunas',
+            0       => 'Belum Bayar',
+            2       => 'Gagal/Dibatalkan',
+            default => 'Tidak Diketahui'
+        };
+
+        return response()->json([
+            'success' => true,
+            'data'    => [
+                'idpesanan'    => $pesanan->idpesanan,
+                'nama'         => $pesanan->nama,
+                'status_bayar' => $statusBayar,
+                'is_lunas'     => (int) $pesanan->status_bayar === 1,
+                'items'        => $items,
+                'total'        => $items->sum('subtotal'),
+            ]
+        ]);
+    }
 }
 

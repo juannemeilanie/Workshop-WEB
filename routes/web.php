@@ -63,6 +63,9 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/barang/{id}/update', [BarangController::class, 'update'])->name('barang.update');
     Route::delete('/barang/{id}/destroy', [BarangController::class, 'destroy'])->name('barang.destroy');
     Route::get('/barang/cetak', [BarangController::class, 'cetak'])->name('barang.cetak');
+    // Scan Barcode 
+    Route::get('/barang/scan', [BarangController::class, 'scan'])->name('barang.scan');
+    Route::post('/barang/scan/find', [BarangController::class, 'findByBarcode'])->name('barang.scan.find');
 
     Route::get('/table', function () {return view('table.Table-html');})->name('Table');
     Route::get('/table/datatables', function () {return view('table.datatables');})->name('Datatables');
@@ -91,6 +94,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/vendor/menu/{id}/edit', [VendorController::class, 'edit'])->name('vendor.menu.edit');
     Route::put('/vendor/menu/{id}', [VendorController::class, 'update'])->name('vendor.menu.update');
     Route::delete('/vendor/menu/{id}', [VendorController::class, 'destroy'])->name('vendor.menu.delete');
+    Route::get('/vendor/pesanan/scan', [VendorController::class, 'scanPage'])->name('vendor.pesanan.scan');
+    Route::post('/vendor/pesanan/scan/read', [VendorController::class, 'readQrCode'])->name('vendor.pesanan.scan.read');
     Route::get('/vendor/pesanan', [VendorController::class, 'pesanan'])->name('vendor.pesanan.index');
     Route::get('/vendor/pesanan/{id}', [VendorController::class, 'detailPesanan']) ->name('vendor.pesanan.detail');
 
@@ -102,7 +107,8 @@ Route::post('/pesanan/store', [PesananController::class, 'store'])->name('pesana
 Route::get('/bayar/{id}', [PaymentController::class, 'show']);
 Route::post('/payment/token', [PaymentController::class, 'token']);
 Route::post('/payment/callback', [PaymentController::class, 'callback']);
-Route::get('/payment/success/{id}', [PaymentController::class, 'success']);
+Route::get('/payment/success/{id}', [PaymentController::class, 'success'])->name('payment.success');
+Route::get('/customer/qrcode/{id}', [PaymentController::class, 'showQrCode'])->name('customer.qrcode');
 
 Route::get('/customer', [CustomerController::class, 'index'])->name('customer.index');
 Route::delete('/customer/{id}/destroy', [CustomerController::class, 'destroy'])->name('customer.destroy');

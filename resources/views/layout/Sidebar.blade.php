@@ -53,16 +53,23 @@
   </li>
 
   <li class="nav-item">
-      <a class="nav-link" href="/vendor/menu">
+      <a class="nav-link" href="{{ route('vendor.menu.index') }}">
           <span class="menu-title">Kelola Menu</span>
           <i class="fa fa-cutlery menu-icon"></i>
       </a>
   </li>
 
   <li class="nav-item">
-      <a class="nav-link" href="/vendor/pesanan">
+      <a class="nav-link" href="{{ route('vendor.pesanan.index') }}">
           <span class="menu-title">Pesanan Lunas</span>
           <i class="fa fa-shopping-cart menu-icon"></i>
+      </a>
+  </li>
+
+  <li class="nav-item">
+      <a class="nav-link" href="{{ route('vendor.pesanan.scan') }}">
+          <span class="menu-title">Scan QRCode</span>
+          <i class="fa fa-qrcode menu-icon"></i>
       </a>
   </li>
 
@@ -93,10 +100,21 @@
   </li>
 
   <li class="nav-item">
-      <a class="nav-link" href="{{ route('barang.index') }}">
-          <span class="menu-title">Barang</span>
-          <i class="fa fa-inbox menu-icon"></i>
-      </a>
+    <a class="nav-link" data-bs-toggle="collapse" href="#menu-barang" aria-expanded="false">
+      <span class="menu-title">Barang</span>
+      <i class="menu-arrow"></i>
+      <i class="fa fa-inbox menu-icon"></i>
+    </a>
+    <div class="collapse" id="menu-barang" data-bs-parent="#sidebar">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item">
+              <a class="nav-link" href="{{ route('barang.index') }}">Barang</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{{ route('barang.scan') }}">Scan Barcode</a>
+          </li>
+        </ul>
+    </div>
   </li>
 
   <li class="nav-item">

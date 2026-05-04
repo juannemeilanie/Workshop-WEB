@@ -100,5 +100,23 @@ class PaymentController extends Controller
 
         return view('customer.succes', compact('pesanan', 'qrCode'));
     }
+
+    public function showQrCode($id)
+    {
+        $pesanan = Pesanan::findOrFail($id);
+
+        $qr = new QrCode(
+            data: $pesanan->idpesanan,
+            size: 200,
+            margin: 10
+        );
+
+        $writer = new PngWriter();
+        $result = $writer->write($qr);
+
+        $qrCode = base64_encode($result->getString());
+
+        return view('customer.qrcode', compact('pesanan', 'qrCode'));
+    }
 }
 

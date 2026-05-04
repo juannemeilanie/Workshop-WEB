@@ -67,5 +67,7 @@
         <p class="text-center">Belum ada menu</p>
     @endforelse
 </div>
+</div>
+</div>
 
 @endsection

@@ -16,6 +16,8 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
         $middleware->validateCsrfTokens(except: [
             'payment/callback',
+            'vendor/pesanan/scan/read',
+
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

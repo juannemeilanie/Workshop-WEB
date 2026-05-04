@@ -72,35 +72,63 @@ class BarangController extends Controller
     }
 
     public function cetak(Request $request){
-    $request->validate([
-        'id_barang' => 'required|array|min:1',
-        'x' => 'required|integer|min:1|max:5',
-        'y' => 'required|integer|min:1|max:8',
-    ]);
+        $request->validate([
+            'id_barang' => 'required|array|min:1',
+            'x' => 'required|integer|min:1|max:5',
+            'y' => 'required|integer|min:1|max:8',
+        ]);
 
-    $barangDipilih = Barang::whereIn('id_barang', $request->id_barang)->get();
-    $generator = new BarcodeGeneratorPNG();
-    foreach ($barangDipilih as $barang) {
-        $barcode = $generator->getBarcode($barang->id_barang, $generator::TYPE_CODE_128);
-        $barang->barcode = base64_encode($barcode);
-    }
-
-    $x = (int) $request->x;
-    $y = (int) $request->y;
-    $startIndex = (($y - 1) * 5) + $x;
-    $labels = array_fill(1, 40, null);
-
-    $index = $startIndex;
-    foreach ($barangDipilih as $barang) {
-        if ($index <= 40) {
-            $labels[$index] = $barang;
-            $index++;
+        $barangDipilih = Barang::whereIn('id_barang', $request->id_barang)->get();
+        $generator = new BarcodeGeneratorPNG();
+        foreach ($barangDipilih as $barang) {
+            $barcode = $generator->getBarcode($barang->id_barang, $generator::TYPE_CODE_128);
+            $barang->barcode = base64_encode($barcode);
         }
+
+        $x = (int) $request->x;
+        $y = (int) $request->y;
+        $startIndex = (($y - 1) * 5) + $x;
+        $labels = array_fill(1, 40, null);
+
+        $index = $startIndex;
+        foreach ($barangDipilih as $barang) {
+            if ($index <= 40) {
+                $labels[$index] = $barang;
+                $index++;
+            }
+        }
+
+        $mm = 2.83465; 
+        $pdf = Pdf::loadView('barang.cetak', compact('labels'))
+            ->setPaper([0, 0, 210 * $mm, 165 * $mm], 'potrait');
+        return $pdf->stream('tag-harga.pdf');
     }
 
-    $mm = 2.83465; 
-    $pdf = Pdf::loadView('barang.cetak', compact('labels'))
-        ->setPaper([0, 0, 210 * $mm, 165 * $mm], 'potrait');
-    return $pdf->stream('tag-harga.pdf');
+    public function scan()
+    {
+        return view('barang.scan');
+    }
+
+    public function findByBarcode(Request $request)
+    {
+        $barcode = $request->barcode;
+
+        $barang = Barang::where('id_barang', $barcode)->first();
+
+        if ($barang) {
+            return response()->json([
+                'success' => true,
+                'data' => [
+                    'id'    => $barang->id_barang,
+                    'nama'  => $barang->nama,
+                    'harga' => $barang->harga,
+                ]
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Barang tidak ditemukan'
+        ]);
     }
 }

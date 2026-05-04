@@ -16,13 +16,19 @@
                     <img src="data:image/png;base64,{{ $qrCode }}">
                     <p><strong>ID Pesanan:</strong> {{ $pesanan->idpesanan }}</p>
 
-                    <br><br>
+                    <a href="{{ route('customer.qrcode', $pesanan->idpesanan) }}" 
+                       class="btn btn-rounded btn-gradient-success mb-2" target="_blank">
+                        Buka QRCode Saya
+                    </a>
 
-                    <a href="{{ route('pesanan.index') }}" class="btn btn-primary">Kembali ke Home</a>
+                    <br>
+
+                    <a href="{{ route('pesanan.index') }}" class="btn btn-rounded btn-gradient-primary">
+                        Kembali ke Home
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 @endsection

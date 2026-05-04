@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\ServiceProvider;
 use Midtrans\Config;
 
@@ -20,6 +21,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-      //
+      Request::setTrustedProxies(['*'], Request::HEADER_X_FORWARDED_FOR);
     }
 }
