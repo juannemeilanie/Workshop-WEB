@@ -29,14 +29,33 @@ class PaymentController extends Controller
     public function token(Request $request)
     {
         try {
-            $pesanan = Pesanan::findOrFail($request->id);
+            $pesanan = Pesanan::with('detailPesanan.menu')
+                        ->findOrFail($request->id);
+
+            if ($pesanan->detailPesanan->isEmpty()) {
+                return response()->json([
+                    'error' => 'Detail pesanan kosong!'
+                ]);
+            }
+
             $orderId = 'ORDER-' . $pesanan->idpesanan;
+
+            $items = [];
+            foreach ($pesanan->detailPesanan as $d) {
+                $items[] = [
+                    'id' => $d->idmenu,
+                    'price' => (int) $d->harga,
+                    'quantity' => (int) $d->jumlah,
+                    'name' => $d->menu->nama_menu
+                ];
+            }
 
             $params = [
                 'transaction_details' => [
                     'order_id' => $orderId,
                     'gross_amount' => (int) $pesanan->total,
                 ],
+                'item_details' => $items, 
                 'customer_details' => [
                     'first_name' => $pesanan->nama,
                 ],
@@ -51,7 +70,7 @@ class PaymentController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'error' => $e->getMessage()
-            ], 500);
+            ]);
         }
     }
 

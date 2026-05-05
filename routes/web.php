@@ -113,10 +113,10 @@ Route::get('/customer/qrcode/{id}', [PaymentController::class, 'showQrCode'])->n
 Route::get('/customer', [CustomerController::class, 'index'])->name('customer.index');
 Route::delete('/customer/{id}/destroy', [CustomerController::class, 'destroy'])->name('customer.destroy');
 
-// Tambah 1 (BLOB)
+
 Route::get('/customer/create1', [CustomerController::class, 'create1'])->name('customer.create1');
 Route::post('/customer/store1', [CustomerController::class, 'store1'])->name('customer.store1');
 
-// Tambah 2 (FILE)
+
 Route::get('/customer/create2', [CustomerController::class, 'create2'])->name('customer.create2');
 Route::post('/customer/store2', [CustomerController::class, 'store2'])->name('customer.store2');

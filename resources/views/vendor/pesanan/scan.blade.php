@@ -49,7 +49,6 @@
 
 <audio id="beep" src="{{ asset('assets/sounds/beep-329314.mp3') }}" preload="auto"></audio>
 
-<!-- HANYA html5-qrcode -->
 <script src="https://unpkg.com/html5-qrcode"></script>
 
 <script>

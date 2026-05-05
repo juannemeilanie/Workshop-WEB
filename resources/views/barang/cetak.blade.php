@@ -12,7 +12,7 @@
             font-family: Arial, sans-serif;
             width: 210mm;
             height: 165mm;
-            background-color: #edf4b7;
+            background-color: #f1f3e4;
         }
 
         table {

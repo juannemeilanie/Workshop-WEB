@@ -70,7 +70,7 @@ document.getElementById('bayar').onclick = function(){
             });
 
         } else {
-            alert("Harap pilih menu terlebih dahulu!");
+            alert("Gagal mendapatkan token pembayaran!");
         }
 
     })
