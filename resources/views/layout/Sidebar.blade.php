@@ -201,6 +201,13 @@
       </ul>
     </div>
   </li>
+
+  <li class="nav-item">
+    <a class="nav-link" href="{{ route('toko.index') }}">
+        <span class="menu-title">Kunjungan Toko</span>
+        <i class="fa fa-map-marker menu-icon"></i>
+    </a>
+  </li>
 @endif
 
 </ul>

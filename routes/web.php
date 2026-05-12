@@ -11,6 +11,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\PesananController;
 use App\Http\Controllers\PosController;
+use App\Http\Controllers\TokoController;
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\WilayahController;
 use Illuminate\Support\Facades\Auth;
@@ -98,6 +99,15 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/vendor/pesanan/scan/read', [VendorController::class, 'readQrCode'])->name('vendor.pesanan.scan.read');
     Route::get('/vendor/pesanan', [VendorController::class, 'pesanan'])->name('vendor.pesanan.index');
     Route::get('/vendor/pesanan/{id}', [VendorController::class, 'detailPesanan']) ->name('vendor.pesanan.detail');
+
+    // TOKO
+    Route::get('/toko', [TokoController::class, 'index'])->name('toko.index');
+    Route::get('/toko/create', [TokoController::class, 'create'])->name('toko.create');
+    Route::post('/toko', [TokoController::class, 'store'])->name('toko.store');
+    Route::get('/toko/kunjungan', [TokoController::class, 'kunjungan'])->name('toko.kunjungan');
+    Route::get('/toko/barcode', [TokoController::class, 'findByBarcode'])->name('toko.barcode');
+    Route::post('/toko/cek', [TokoController::class, 'cekKunjungan'])->name('toko.cek');
+    Route::get('/toko/{toko}/cetak-barcode', [TokoController::class, 'cetakBarcode'])->name('toko.cetak');
 
 });
 
