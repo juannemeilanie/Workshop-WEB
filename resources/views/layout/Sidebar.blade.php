@@ -208,6 +208,21 @@
         <i class="fa fa-map-marker menu-icon"></i>
     </a>
   </li>
+
+  <li class="nav-item">
+    <a class="nav-link" data-bs-toggle="collapse" href="#antrian" aria-expanded="false" aria-controls="antrian">
+      <span class="menu-title">Sistem Antrian</span>
+      <i class="menu-arrow"></i>
+      <i class="fa fa-list menu-icon"></i>
+    </a>
+    <div class="collapse" id="antrian">
+      <ul class="nav flex-column sub-menu">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('admin') }}">Kelola Antrian</a>
+        </li>
+      </ul>
+    </div>
+  </li>
 @endif
 
 </ul>

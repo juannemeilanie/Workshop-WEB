@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AntreanController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\BukuController;
@@ -109,6 +110,16 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/toko/cek', [TokoController::class, 'cekKunjungan'])->name('toko.cek');
     Route::get('/toko/{toko}/cetak-barcode', [TokoController::class, 'cetakBarcode'])->name('toko.cetak');
 
+
+    // ===== ADMIN ROUTES =====
+    Route::get('/admin', [AntreanController::class, 'admin'])->name('admin');
+    Route::post('/admin/panggil', [AntreanController::class, 'panggil'])->name('admin.panggil');
+    Route::post('/admin/reset', [AntreanController::class, 'reset'])->name('admin.reset');
+    Route::post('/admin/terlambat/{id}', [AntreanController::class, 'tandaiTerlambat'])->name('admin.terlambat');
+    Route::post('/admin/panggil-terlambat/{id}', [AntreanController::class, 'panggilTerlambat'])->name('admin.panggil.terlambat');
+    Route::post('/admin/selesai/{id}', [AntreanController::class, 'selesaikan'])->name('admin.selesaikan');
+
+
 });
 
 // CUSTOMER
@@ -130,3 +141,12 @@ Route::post('/customer/store1', [CustomerController::class, 'store1'])->name('cu
 
 Route::get('/customer/create2', [CustomerController::class, 'create2'])->name('customer.create2');
 Route::post('/customer/store2', [CustomerController::class, 'store2'])->name('customer.store2');
+
+
+Route::get('/guest', [AntreanController::class, 'guest'])->name('guest');
+Route::post('/guest/daftar', [AntreanController::class, 'daftar'])->name('guest.daftar');
+
+        
+Route::get('/sse/antrian', [AntreanController::class, 'stream'])->name('sse.stream');
+
+Route::get('/papan', [AntreanController::class, 'papan'])->name('papan');
