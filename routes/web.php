@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\AntreanController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BarangController;
@@ -7,6 +8,7 @@ use App\Http\Controllers\BukuController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\OtpController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PdfController;
@@ -119,6 +121,17 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/admin/panggil-terlambat/{id}', [AntreanController::class, 'panggilTerlambat'])->name('admin.panggil.terlambat');
     Route::post('/admin/selesai/{id}', [AntreanController::class, 'selesaikan'])->name('admin.selesaikan');
 
+    // Mahasiswa
+    Route::get('/mahasiswa', [MahasiswaController::class, 'index'])->name('mahasiswa.index');
+    Route::get('/mahasiswa/create', [MahasiswaController::class, 'create'])->name('mahasiswa.create');
+    Route::post('/mahasiswa', [MahasiswaController::class, 'store'])->name('mahasiswa.store');
+    Route::get('/mahasiswa/{id}/daftar-nfc', [MahasiswaController::class, 'daftarNfc'])->name('mahasiswa.daftar');
+    Route::post('/mahasiswa/{id}/daftar-nfc', [MahasiswaController::class, 'simpanNfc'])->name('mahasiswa.simpan');
+
+    // Absensi
+    Route::get('/absensi', [AbsensiController::class, 'index'])->name('absensi.index');
+    Route::get('/absensi/scan', [AbsensiController::class, 'scan'])->name('absensi.scan');
+    Route::post('/absensi/proses', [AbsensiController::class, 'proses'])->name('absensi.proses');
 
 });
 

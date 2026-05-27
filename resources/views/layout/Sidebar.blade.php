@@ -223,6 +223,25 @@
       </ul>
     </div>
   </li>
+
+  <li class="nav-item">
+    <a class="nav-link" data-bs-toggle="collapse" href="#nfc" aria-expanded="false" aria-controls="nfc">
+      <span class="menu-title">NFC</span>
+      <i class="menu-arrow"></i>
+      <i class="fa fa-list menu-icon"></i>
+    </a>
+    <div class="collapse" id="nfc">
+      <ul class="nav flex-column sub-menu">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('mahasiswa.index') }}">Daftar Mahasiswa</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('absensi.index') }}">Daftar Absensi</a>
+        </li>
+      </ul>
+    </div>
+  </li>
+
 @endif
 
 </ul>
